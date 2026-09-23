@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { categoryList, site } from "@/lib/site";
+import { categoryList, site } from "@/config/site";
 
 const nav = [
   ...categoryList.map((c) => ({ href: `/category/${c.key}`, index: c.index, label: c.zh, key: c.key })),

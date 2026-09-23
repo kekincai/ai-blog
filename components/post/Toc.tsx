@@ -1,23 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Heading } from "@/lib/posts";
+import type { Heading } from "@/lib/content/markdown";
 
 export default function Toc({ headings }: { headings: Heading[] }) {
   const [active, setActive] = useState(headings[0]?.id);
 
+  // 高亮「最后一个已经滚过顶部的标题」：直接跳转、刷新到页面中间时也准确
   useEffect(() => {
     const els = headings.map((h) => document.getElementById(h.id)).filter(Boolean) as HTMLElement[];
     if (!els.length) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: "-120px 0px -65% 0px" }
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    const onScroll = () => {
+      const passed = els.filter((el) => el.getBoundingClientRect().top < 140);
+      setActive((passed.at(-1) ?? els[0]).id);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, [headings]);
 
   if (!headings.length) return <div />;

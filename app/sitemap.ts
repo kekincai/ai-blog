@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/posts";
-import { categoryList, site } from "@/lib/site";
+import { getAllPosts } from "@/lib/content/posts";
+import { categoryList, site } from "@/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PostList } from "@/components/PostRow";
-import SectionLabel from "@/components/SectionLabel";
-import { getPostsByCategory } from "@/lib/posts";
-import { categories, categoryList, type CategoryKey } from "@/lib/site";
+import { PostList } from "@/components/posts/PostList";
+import PageHead from "@/components/ui/PageHead";
+import { getPostsByCategory } from "@/lib/content/posts";
+import { categories, categoryList, type CategoryKey } from "@/config/site";
 
 type Props = { params: Promise<{ cat: string }> };
 
@@ -26,15 +26,9 @@ export default async function CategoryPage({ params }: Props) {
   const posts = getPostsByCategory(c.key);
   return (
     <>
-      <section className="page-head">
-        <div className="wrap">
-          <div>
-            <SectionLabel>{c.index} — {c.en} / {c.ja}</SectionLabel>
-            <h1>{c.zh}</h1>
-          </div>
-          <p>{c.desc}</p>
-        </div>
-      </section>
+      <PageHead label={<>{c.index} — {c.en} / {c.ja}</>} title={c.zh}>
+        <p>{c.desc}</p>
+      </PageHead>
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <PostList posts={posts} />

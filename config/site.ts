@@ -9,7 +9,9 @@ export const site = {
   description: "一个人的 AI 学习现场：学习、认识与体会。",
   author: "Paul",
   url: siteUrl, // 绑定自定义域名后，在 Vercel 里设置环境变量 SITE_URL 即可
-  bio: "[一句话自我介绍：你是谁、在做什么、为什么开始学 AI]",
+  bio: "正在系统地学习人工智能。这里是我的学习现场：读过的论文、写过的代码，和一路上的想法。", // TODO: 换成你自己的介绍
+  github: "https://github.com/kekincai",
+  repo: "https://github.com/kekincai/ai-blog",
 };
 
 export type CategoryKey = "learn" | "insight" | "feel";

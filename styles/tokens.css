@@ -1,0 +1,31 @@
+/* ==========================================================
+   PAUL.LOG — 余白 × 霓虹
+   颜色 / 字体都在这里，改 --accent 即可换主色
+   ========================================================== */
+:root {
+  --washi: #f2efe8;
+  --washi-2: #e9e5db;
+  --ink: #141417;
+  --muted: #5a5750;
+  --hair: #cfc9bc;
+
+  --night: #0e0f13;
+  --night-2: #0a0b0e;
+  --night-line: #2a2d35;
+  --night-text: #e8e6e1;
+  --night-dim: #9da2ab;
+
+  --accent: #ff2e63;       /* 霓虹主色（装饰 / 大块面） */
+  --accent-ink: #c8134a;   /* 主色的深色版（浅底上的小字） */
+  --cyan: #00e5ff;
+  --c-learn: #c8134a;
+  --c-insight: #007c8a;
+  --c-feel: #6d3fd6;
+
+  --serif: var(--font-serif), "Songti SC", serif;
+  --sans: var(--font-sans), "PingFang SC", "Hiragino Sans", sans-serif;
+  --mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --gutter: 80px;
+  --max: 1440px;
+}

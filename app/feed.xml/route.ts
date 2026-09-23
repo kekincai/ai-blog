@@ -1,5 +1,5 @@
-import { getAllPosts } from "@/lib/posts";
-import { site } from "@/lib/site";
+import { getAllPosts } from "@/lib/content/posts";
+import { site } from "@/config/site";
 
 export const dynamic = "force-static";
 
