@@ -55,6 +55,10 @@ print("代码块会自动高亮")
 
 站点地址（RSS、sitemap、分享链接会用到）默认取 Vercel 的生产域名；绑定自定义域名后，在 Vercel 项目的环境变量里设置 `SITE_URL=https://你的域名` 即可。
 
+访问统计用 Vercel Web Analytics（`app/layout.tsx` 里的 `<Analytics />`），在 Vercel 项目的 Analytics 页查看。
+
+GitHub Actions（`.github/workflows/ci.yml`）会在每次推送和 PR 时跑类型检查 + 构建，文章 frontmatter 写错会在这里提前暴露；Dependabot 每周提依赖升级 PR。
+
 字体通过 `next/font` 在构建时下载并自托管，访问时不依赖 Google Fonts。
 
 订阅框目前只是前端演示，要真正收邮件可接入 Buttondown / Resend 等服务（改 `components/Subscribe.tsx`）。
