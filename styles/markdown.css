@@ -1,0 +1,74 @@
+/* 文章正文里 Markdown 渲染出来的元素（语法见 docs/WRITING.md） */
+
+/* Markdown 正文 */
+.prose { grid-column: 3; font-size: 18px; line-height: 2.05; counter-reset: h2; min-width: 0; }
+.prose .md > * { margin: 0 0 28px; }
+.feel-box { margin-top: 56px; }
+.prose h2 { font: 900 32px/1.4 var(--serif); margin: 64px 0 24px; display: flex; gap: 16px; align-items: baseline; scroll-margin-top: 120px; }
+.prose h2:first-child { margin-top: 0; }
+.prose h2::before { counter-increment: h2; content: counter(h2, decimal-leading-zero); font: 14px var(--mono); color: var(--accent-ink); }
+.prose h3 { font: 700 22px var(--serif); margin: 40px 0 16px; }
+.prose a { border-bottom: 1px solid var(--accent); }
+.prose strong { font-weight: 700; }
+.prose ul, .prose ol { padding-left: 24px; }
+.prose li { margin-bottom: 8px; }
+.prose li::marker { font-family: var(--mono); color: var(--accent-ink); }
+.prose hr { border: 0; border-top: 1px solid var(--hair); margin: 56px 0; }
+.prose img { margin: 40px 0; }
+.prose :not(pre) > code { font: .88em var(--mono); background: var(--washi-2); padding: 2px 6px; }
+.prose :not(pre) > code[data-language] { background: var(--night); } /* 带语言高亮的行内代码 `x{:python}` */
+.prose blockquote { margin: 48px 0; padding: 40px 0 40px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--hair); font: 600 28px/1.7 var(--serif); display: flex; gap: 20px; }
+.prose blockquote::before { content: "「"; color: var(--accent); font-size: 48px; line-height: 1; }
+.prose blockquote p { margin: 0; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.prose th, .prose td { border-bottom: 1px solid var(--hair); padding: 10px 8px; text-align: left; }
+.prose th { font: 12px var(--mono); letter-spacing: .1em; color: var(--muted); border-bottom: 2px solid var(--ink); }
+
+/* 代码块（rehype-pretty-code） */
+.prose figure[data-rehype-pretty-code-figure] { margin: 40px 0; background: var(--night); border: 1px solid var(--night-line); }
+.prose figcaption[data-rehype-pretty-code-title] { height: 40px; padding: 0 20px; display: flex; align-items: center; border-bottom: 1px solid var(--night-line); font: 12px var(--mono); color: var(--night-dim); }
+.prose pre { margin: 0; padding: 24px; overflow-x: auto; font: 14px/1.85 var(--mono); background: var(--night); color: var(--night-text); }
+.prose pre code { font: inherit; counter-reset: line; }
+.prose pre [data-highlighted-line] { background: rgba(255, 46, 99, .12); box-shadow: inset 2px 0 var(--accent); }
+
+/* 行号：```python showLineNumbers */
+.prose pre code[data-line-numbers] > [data-line]::before { counter-increment: line; content: counter(line); display: inline-block; width: 2ch; margin-right: 20px; text-align: right; color: #4a4f5a; }
+.prose pre [data-highlighted-chars] { background: rgba(0, 229, 255, .16); border-radius: 2px; padding: 1px 2px; }
+
+/* 其他 Markdown 元素 */
+.prose h4 { font: 700 18px var(--sans); margin: 32px 0 12px; }
+.prose del { color: var(--muted); }
+.prose mark { background: rgba(255, 46, 99, .18); color: inherit; padding: 0 2px; }
+.prose table { display: block; overflow-x: auto; }
+.prose figure:not([data-rehype-pretty-code-figure]) { margin: 40px 0; }
+.prose figure img { margin: 0; }
+.prose figcaption:not([data-rehype-pretty-code-title]) { margin-top: 12px; font: 12px/1.8 var(--mono); color: var(--muted); text-align: center; letter-spacing: .05em; }
+.prose .contains-task-list { list-style: none; padding-left: 4px; }
+.prose .task-list-item input { accent-color: var(--accent-ink); margin: 0 10px 0 0; vertical-align: -2px; }
+
+/* 提示框：> [!NOTE] / [!TIP] / [!IMPORTANT] / [!WARNING] / [!CAUTION] / [!FEEL] */
+.callout { --c: var(--ink); margin: 40px 0; padding: 20px 24px; border-left: 3px solid var(--c); background: var(--washi-2); font-size: 16px; line-height: 1.95; }
+.callout > * { margin: 0 0 12px; }
+.callout > :last-child { margin-bottom: 0; }
+.callout-title { font: 12px var(--mono); letter-spacing: .12em; color: var(--c); }
+.callout-note { --c: var(--c-insight); }
+.callout-tip { --c: #2f7d4f; }
+.callout-important { --c: var(--c-feel); }
+.callout-warning { --c: #a8640c; }
+.callout-caution { --c: var(--accent-ink); }
+.callout-feel { --c: var(--ink); border: 1px solid var(--ink); padding: 28px 32px; }
+
+/* 数学公式（KaTeX）：长公式横向滚动 */
+.prose .katex { font-size: 1.05em; }
+.prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 8px 0; margin: 32px 0; }
+
+/* 脚注 */
+.prose .footnotes { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--hair); font-size: 14px; line-height: 1.9; color: var(--muted); }
+.prose .footnote-label { font: 12px var(--mono); letter-spacing: .12em; color: var(--muted); margin: 0 0 12px; }
+.prose .footnotes ol { margin: 0; }
+.prose [data-footnote-ref] { font: 11px var(--mono); border: 0; color: var(--accent-ink); margin-left: 2px; }
+.prose [data-footnote-ref]::before { content: "["; }
+.prose [data-footnote-ref]::after { content: "]"; }
+.prose [data-footnote-backref] { border: 0; font-family: var(--mono); }
+.prose [data-footnote-ref] + * { scroll-margin-top: 120px; }
+.prose .footnotes li { scroll-margin-top: 120px; }

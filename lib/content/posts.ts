@@ -1,19 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import rehypeSlug from "rehype-slug";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeStringify from "rehype-stringify";
-import { toString } from "hast-util-to-string";
-import { visit } from "unist-util-visit";
-import type { Root } from "hast";
-import { categories, type CategoryKey } from "./site";
+import { renderMarkdown, type Heading } from "./markdown";
+import { categories, type CategoryKey } from "@/config/site";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
+
+/** 草稿（draft: true）只在本地开发和 Vercel 预览部署里显示，正式站点不显示 */
+const SHOW_DRAFTS = process.env.NODE_ENV !== "production" || process.env.VERCEL_ENV === "preview";
 
 export type PostMeta = {
   slug: string;
@@ -27,9 +21,8 @@ export type PostMeta = {
   no: number; // 按时间顺序的编号
   notes: string[]; // 文章右侧的边注
   feel: string; // 文末「体会」框
+  draft: boolean;
 };
-
-export type Heading = { id: string; text: string };
 
 export type Post = PostMeta & { html: string; headings: Heading[] };
 
@@ -39,26 +32,32 @@ function readingMinutes(src: string) {
   return Math.max(1, Math.ceil(cjk / 400 + words / 220));
 }
 
+/** 文章是 content/posts/<slug>.md，文件名就是网址。以 _ 开头的文件（如 _template.md）会被忽略 */
 function readRaw() {
   if (!fs.existsSync(POSTS_DIR)) return [];
+  const bad = (file: string, msg: string) => new Error(`content/posts/${file}: ${msg}`);
+
   return fs
     .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith(".md"))
+    .filter((f) => f.endsWith(".md") && !f.startsWith("_"))
     .map((file) => {
       const slug = file.replace(/\.md$/, "");
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
       const { data, content } = matter(raw);
       const date = data.date instanceof Date ? data.date.toISOString().slice(0, 10) : String(data.date ?? "");
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw bad(file, `date 要写成 YYYY-MM-DD，现在是 "${date}"`);
+      if (!data.title) throw bad(file, "缺少 title");
       const category = data.category ?? "learn";
       if (!Object.hasOwn(categories, category)) {
-        throw new Error(`content/posts/${file}: category "${category}" 无效，只能是 ${Object.keys(categories).join(" / ")}`);
+        throw bad(file, `category "${category}" 无效，只能是 ${Object.keys(categories).join(" / ")}`);
       }
+
       return {
         slug,
         content,
         meta: {
           slug,
-          title: String(data.title ?? slug),
+          title: String(data.title),
           date,
           category: category as CategoryKey,
           excerpt: String(data.excerpt ?? ""),
@@ -68,9 +67,11 @@ function readRaw() {
           no: 0,
           notes: Array.isArray(data.notes) ? data.notes.map(String) : [],
           feel: String(data.feel ?? ""),
+          draft: Boolean(data.draft),
         } satisfies PostMeta,
       };
-    });
+    })
+    .filter((r) => SHOW_DRAFTS || !r.meta.draft);
 }
 
 /** 所有文章，按日期倒序 */
@@ -95,27 +96,7 @@ export async function getPost(slug: string): Promise<Post | null> {
   if (!raw) return null;
   const meta = getAllPosts().find((p) => p.slug === slug)!;
 
-  // 在 rehype-slug 之后从 HTML 树里收集 h2，id 与正文锚点保证一致，也不会误读代码块
-  const headings: Heading[] = [];
-  const collectHeadings = () => (tree: Root) => {
-    visit(tree, "element", (node) => {
-      if (node.tagName === "h2" && typeof node.properties.id === "string") {
-        headings.push({ id: node.properties.id, text: toString(node) });
-      }
-    });
-  };
-
-  const file = await unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkRehype)
-    .use(rehypeSlug)
-    .use(collectHeadings)
-    .use(rehypePrettyCode, { theme: "vitesse-black", keepBackground: false })
-    .use(rehypeStringify)
-    .process(raw.content);
-
-  return { ...meta, html: String(file), headings };
+  return { ...meta, ...(await renderMarkdown(raw.content)) };
 }
 
 export function getAdjacent(slug: string) {

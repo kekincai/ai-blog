@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { categories } from "@/lib/site";
-import { formatDate, type PostMeta } from "@/lib/posts";
+import { categories } from "@/config/site";
+import { formatDate, type PostMeta } from "@/lib/content/posts";
 
 export default function PostRow({ post }: { post: PostMeta }) {
   const cat = categories[post.category];
@@ -11,7 +11,9 @@ export default function PostRow({ post }: { post: PostMeta }) {
         <i style={{ background: cat.color }} />
         {cat.zh}
       </span>
-      <span className="title">{post.title}</span>
+      <span className="title">
+        {post.title} {post.draft && <span className="draft-chip">DRAFT</span>}
+      </span>
       <span className="time">{post.minutes} MIN</span>
       <span className="arrow" aria-hidden="true">→</span>
     </Link>

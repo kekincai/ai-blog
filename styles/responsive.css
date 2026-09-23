@@ -1,0 +1,66 @@
+/* 响应式：所有断点集中在这里，放在最后加载以保持覆盖顺序 */
+
+/* ---------- responsive ---------- */
+@media (max-width: 1200px) {
+  :root { --gutter: 48px; }
+  .hero h1 { font-size: 68px; }
+  .hero-art { display: none; }
+  .art-body .wrap { grid-template-columns: 1fr 3fr; }
+  .art-body .prose { grid-column: 2; }
+  .side-notes { display: none; }
+}
+@media (max-width: 900px) {
+  :root { --gutter: 24px; }
+  .nav { gap: 20px; }
+  .nav a span, .status, .progress { display: none; }
+  .hero .wrap { min-height: 0; padding-top: 64px; }
+  .hero h1 { font-size: 48px; }
+  .hero-tags { padding-bottom: 48px; }
+  .section { padding-block: 72px 80px; }
+  .sec-head { flex-direction: column; align-items: flex-start; }
+  .sec-head h2 { font-size: 36px; }
+  .pillars { grid-template-columns: 1fr; }
+  .pillar, .pillar:first-child, .pillar:last-child { padding: 32px 0; border-right: 0; border-bottom: 1px solid var(--hair); }
+  .featured { grid-template-columns: 1fr; gap: 32px; }
+  .featured-body h3 { font-size: 30px; }
+  .post-row { grid-template-columns: 1fr auto; gap: 8px 16px; }
+  .post-row .title { grid-column: 1 / -1; order: 3; font-size: 20px; }
+  .post-row .time, .post-row .arrow { display: none; }
+  .now .wrap { grid-template-columns: 1fr; padding-block: 80px; }
+  .now-intro h2 { font-size: 42px; }
+  .now-intro .kana { display: none; }
+  .term-body { font-size: 13px; padding: 24px 20px; }
+  .term-line b { width: 72px; }
+  .quote .wrap { padding-block: 96px; flex-direction: column; }
+  .quote .side { width: auto; }
+  .quote blockquote p { font-size: 32px; }
+  .hanko { margin: 0; }
+  .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+  .subscribe, .foot-links { grid-column: auto; }
+  .foot-links { flex-direction: row; gap: 24px; }
+  .art-head .wrap { grid-template-columns: 1fr; padding-block: 56px 48px; }
+  .art-head-main { grid-column: 1; }
+  .art-head h1 { font-size: 38px; }
+  .art-head .vert { display: none; }
+  .art-band .eq { font-size: 18px; }
+  .art-band .matrix { display: none; }
+  .art-body .wrap { grid-template-columns: 1fr; padding-block: 56px 80px; }
+  .art-body .prose { grid-column: 1; font-size: 17px; }
+  .toc { display: none; }
+  .prose h2 { font-size: 26px; }
+  .prose blockquote { font-size: 22px; }
+  .pager { grid-template-columns: 1fr; }
+  .pager a, .pager a + a, .pager .next { padding: 32px 0; border-left: 0; align-items: flex-start; text-align: left; border-top: 1px solid var(--hair); }
+  .page-head .wrap { flex-direction: column; align-items: flex-start; padding-block: 64px 40px; }
+  .page-head h1 { font-size: 48px; }
+}
+@media (max-width: 600px) {
+  .nav { gap: 16px; font-size: 14px; }
+  .nav a { white-space: nowrap; }
+  .brand-name small { display: none; }
+  .brand-name strong { font-size: 14px; letter-spacing: .12em; }
+  .seal { width: 36px; height: 36px; font-size: 20px; }
+  .site-header .wrap { height: 68px; }
+  .hero h1 { font-size: 40px; }
+  .hero-tags { gap: 12px 24px; }
+}

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { JetBrains_Mono, Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import { getAllPosts } from "@/lib/posts";
-import { site } from "@/lib/site";
-import "./globals.css";
+import SiteHeader from "@/components/layout/SiteHeader";
+import SiteFooter from "@/components/layout/SiteFooter";
+import { getAllPosts } from "@/lib/content/posts";
+import { site } from "@/config/site";
+import "katex/dist/katex.min.css";
+import "@/styles/index.css";
 
 // 构建时下载并自托管字体，访问时不再请求 Google（大陆也能正常加载）
 // CJK 字体按 unicode-range 切片，浏览器只下载用到的字；不预加载以免首屏拉取过多
@@ -18,6 +19,8 @@ export const metadata: Metadata = {
   title: { default: `${site.name} — ${site.tagline}`, template: `%s — ${site.name}` },
   description: site.description,
   alternates: { types: { "application/rss+xml": "/feed.xml" } },
+  openGraph: { siteName: site.name, locale: "zh_CN", type: "website" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

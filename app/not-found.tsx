@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SectionLabel from "@/components/SectionLabel";
+import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function NotFound() {
   return (

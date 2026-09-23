@@ -1,0 +1,27 @@
+/* 列表类：区块标题、文章列表、列表页头、归档年份 */
+
+/* ---------- section heads ---------- */
+.section { padding-block: 96px 120px; }
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 48px; }
+.sec-head > div { display: flex; flex-direction: column; gap: 16px; }
+.sec-head h2 { margin: 0; font: 600 52px/1.2 var(--serif); }
+.sec-head p { margin: 0; max-width: 420px; font-size: 16px; line-height: 1.9; color: var(--muted); }
+
+/* ---------- post list ---------- */
+.post-list { border-top: 2px solid var(--ink); }
+.post-row { display: grid; grid-template-columns: 160px 150px 1fr 120px 40px; align-items: center; padding: 30px 0; border-bottom: 1px solid var(--hair); transition: padding .2s, background .2s; }
+.post-row:hover { color: var(--ink); padding-inline: 16px; background: var(--washi-2); }
+.post-row:hover .title { color: var(--accent-ink); }
+.post-row .date, .post-row .time { font: 13px var(--mono); color: var(--muted); }
+.post-row .time { text-align: right; font-size: 12px; }
+.post-row .cat { font: 12px var(--mono); display: flex; align-items: center; gap: 8px; letter-spacing: .08em; }
+.post-row .cat i { width: 8px; height: 8px; }
+.post-row .title { font: 600 24px/1.5 var(--serif); }
+.post-row .arrow { font: 18px var(--mono); text-align: right; }
+.empty { padding: 48px 0; color: var(--muted); font-family: var(--mono); font-size: 14px; }
+
+/* 列表页头 */
+.page-head .wrap { padding-block: 96px 64px; display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; }
+.page-head h1 { margin: 16px 0 0; font: 900 72px/1.2 var(--serif); }
+.page-head p { margin: 0; max-width: 420px; color: var(--muted); line-height: 1.9; }
+.year { font: 700 14px var(--mono); letter-spacing: .1em; padding: 48px 0 16px; color: var(--accent-ink); }

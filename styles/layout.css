@@ -1,0 +1,38 @@
+/* 全站框架：页头、页脚 */
+
+/* ---------- header ---------- */
+.site-header { border-bottom: 1px solid var(--hair); position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--washi) 92%, transparent); backdrop-filter: blur(8px); }
+.site-header .wrap { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand:hover { color: var(--ink); }
+.seal { width: 44px; height: 44px; display: grid; place-items: center; background: var(--accent); color: var(--ink); font: 900 24px var(--serif); }
+.brand-name { display: flex; flex-direction: column; gap: 2px; }
+.brand-name strong { font: 700 16px var(--mono); letter-spacing: .18em; }
+.brand-name small { font-size: 11px; color: var(--muted); letter-spacing: .2em; }
+.nav { display: flex; gap: 48px; font-size: 15px; }
+.nav a { display: flex; gap: 8px; align-items: baseline; }
+.nav a span { font: 11px var(--mono); color: var(--muted); }
+.nav a[aria-current="page"] { color: var(--accent-ink); }
+.nav a[aria-current="page"] span { color: inherit; }
+.status { display: flex; align-items: center; gap: 10px; font: 12px var(--mono); color: var(--muted); letter-spacing: .08em; }
+.status i { width: 8px; height: 8px; background: var(--accent); }
+.progress { display: flex; align-items: center; gap: 10px; font: 12px var(--mono); color: var(--muted); letter-spacing: .08em; }
+.progress .bar { width: 120px; height: 4px; background: var(--hair); }
+.progress .bar span { display: block; height: 100%; background: var(--accent); }
+
+/* ---------- footer ---------- */
+.site-footer { border-top: 2px solid var(--ink); }
+.site-footer .wrap { padding-block: 80px 48px; display: flex; flex-direction: column; gap: 64px; }
+.foot-grid { display: grid; grid-template-columns: 4fr 1fr 4fr 1fr 2fr; }
+.foot-brand { display: flex; flex-direction: column; gap: 16px; }
+.foot-brand strong { font: 700 18px var(--mono); letter-spacing: .18em; }
+.foot-brand p { margin: 0; font-size: 15px; line-height: 1.9; color: var(--muted); }
+.subscribe { grid-column: 3; display: flex; flex-direction: column; gap: 14px; }
+.subscribe label { font-size: 15px; font-weight: 500; }
+.subscribe .row { display: flex; }
+.subscribe input { flex: 1; min-width: 0; height: 52px; padding: 0 16px; border: 1px solid var(--ink); border-right: 0; background: transparent; font: 14px var(--mono); color: var(--ink); border-radius: 0; }
+.subscribe button { height: 52px; padding: 0 24px; border: 1px solid var(--ink); background: var(--accent); color: var(--ink); font: 700 15px var(--sans); cursor: pointer; border-radius: 0; }
+.subscribe button:hover { background: var(--ink); color: var(--washi); }
+.subscribe .note { font: 12px var(--mono); color: var(--muted); min-height: 1em; }
+.foot-links { grid-column: 5; display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
+.foot-bottom { display: flex; justify-content: space-between; font: 12px var(--mono); color: var(--muted); letter-spacing: .08em; padding-top: 24px; border-top: 1px solid var(--hair); }
