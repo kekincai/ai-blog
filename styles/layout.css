@@ -5,10 +5,11 @@
 .site-header .wrap { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: flex; align-items: center; gap: 14px; }
 .brand:hover { color: var(--ink); }
-.brand-mark { flex-shrink: 0; }
-.brand-mark .enso-mark-ring { transform-origin: 32px 32px; }
-.brand:hover .enso-mark-ring { animation: spin 6s linear infinite; }
-@media (prefers-reduced-motion: reduce) { .brand:hover .enso-mark-ring { animation: none; } }
+/* 首页页头：加高，铺满「樱花树下苍鹭骑车」的动画，Logo 和导航浮在天空上 */
+.site-header.is-home { position: relative; height: clamp(240px, 24vw, 360px); border-bottom: 0; background: #f3eadb; backdrop-filter: none; }
+.site-header.is-home .wrap { position: relative; z-index: 1; }
+.site-header.is-home::before { content: ""; position: absolute; inset: 0 0 auto; height: 110px; z-index: 1; pointer-events: none; background: linear-gradient(#f3eadb, rgba(243, 234, 219, 0)); }
+.home-scene { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .brand-name { display: flex; flex-direction: column; gap: 2px; }
 .brand-name strong { font: 700 16px var(--mono); letter-spacing: .18em; }
 .brand-name small { font-size: 11px; color: var(--muted); letter-spacing: .2em; }

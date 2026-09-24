@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="app/icon.svg" width="72" height="72" alt="" />
+<img src="docs/heron.svg" width="720" alt="樱花树下，苍鹭骑着自行车" />
 
 # PAUL.LOG · AI 学习笔记
 
@@ -18,6 +18,7 @@
 
 - **Markdown 写作**：一篇文章一个 `.md` 文件，推送即发布。支持代码高亮（行号、行高亮）、KaTeX 数学公式、提示框、脚注、表格、任务清单、带图注的图片。→ [写作指南](docs/WRITING.md)
 - **三个维度**：文章分为学习 / 认识 / 体会三类，各有分类页和配色。
+- **首页页头动画**：樱花树下苍鹭骑自行车（移植自原网页：腿按骨长实时反解，花瓣飘落），尊重系统的「减弱动态效果」。
 - **阅读体验**：章节自动编号、滚动高亮的目次、阅读进度、边注、文末体会框、上一篇 / 下一篇。
 - **标签与搜索**：每个标签有自己的页面；站内搜索在浏览器里完成，不需要后端。
 - **草稿与预览**：`draft: true` 的文章只在本地和 Vercel 预览部署里出现。
@@ -41,6 +42,7 @@ npm run dev      # http://localhost:3000
 | `npm run lint` | TypeScript 类型检查 |
 | `npm run check-links` | 死链检查（先 build） |
 | `npm run fonts` | 重新生成中文字体子集（dev / build 前会自动运行） |
+| `npm run heron` | 从 `lib/heron/scene.ts` 重新导出网站图标和 README 插图 |
 
 ## 写文章
 
@@ -70,19 +72,21 @@ cp content/posts/_template.md content/posts/my-first-post.md
 │   └── opengraph-image.tsx 全站分享卡片图
 ├── components/
 │   ├── layout/             页头、页脚、订阅框
+│   ├── sakura/             首页页头的苍鹭骑车动画
 │   ├── home/               首页各区块（Hero、三个维度、精选、最近、学习日志、引语）
 │   ├── post/               文章页各部分（头部、横幅、目次、边注、体会框、翻页）
 │   ├── posts/              文章列表
 │   ├── search/             搜索框
-│   └── ui/                 通用小组件（圆相标志、页头、结构化数据等）
+│   └── ui/                 通用小组件（页头、结构化数据等）
 ├── config/site.ts          站点配置：名称、简介、链接、分类、学习日志
 ├── content/posts/          文章（Markdown）
 ├── docs/WRITING.md         写作指南
 ├── lib/
 │   ├── content/            文章读取、Markdown 渲染管线、自定义语法插件
+│   ├── heron/              苍鹭骑车场景（SVG 与动画，动画、图标、分享卡片共用）
 │   └── og.tsx              分享卡片与图标的绘制
 ├── public/posts/<slug>/    文章配图
-├── scripts/                字体子集化、死链检查
+├── scripts/                字体子集化、死链检查、导出苍鹭图标
 └── styles/                 样式，按区域拆分，入口是 index.css
 ```
 
@@ -96,7 +100,7 @@ cp content/posts/_template.md content/posts/my-first-post.md
 | 颜色、字体 | [`styles/tokens.css`](styles/tokens.css)（改 `--accent` 换主色） |
 | 首页某个区块 | [`components/home/`](components/home) |
 | 关于页 | [`app/about/page.tsx`](app/about/page.tsx) |
-| 网站图标 / 左上角标志 | [`app/icon.svg`](app/icon.svg)、[`components/ui/EnsoMark.tsx`](components/ui/EnsoMark.tsx) |
+| 首页页头动画、网站图标 | [`lib/heron/scene.ts`](lib/heron/scene.ts)，改完运行 `npm run heron` 重新导出 `app/icon.svg` |
 
 ## 部署
 

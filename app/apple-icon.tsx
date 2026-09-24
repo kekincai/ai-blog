@@ -1,14 +1,14 @@
 import { ImageResponse } from "next/og";
-import { EnsoMark } from "@/lib/og";
+import { HERON_ICON } from "@/lib/og";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
+/** iOS 主屏图标：苍鹭骑车（与 app/icon.svg 同一张图） */
 export default function AppleIcon() {
   return new ImageResponse(
-    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#f2efe8" }}>
-      <EnsoMark size={150} variant="fine" />
-    </div>,
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={HERON_ICON} width={180} height={180} alt="" />,
     size
   );
 }
