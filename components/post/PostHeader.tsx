@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatDate, type PostMeta } from "@/lib/content/posts";
+import { formatDate, tagHref, type PostMeta } from "@/lib/content/posts";
 import { categories } from "@/config/site";
 
 /** 文章头：面包屑、分类、标题、摘要、日期与标签 */
@@ -24,7 +24,11 @@ export default function PostHeader({ post }: { post: PostMeta }) {
           <div className="art-meta">
             <time dateTime={post.date}>{formatDate(post.date)}</time>
             <span>{post.minutes} MIN READ</span>
-            <span>{post.tags.map((t) => `#${t}`).join(" ")}</span>
+            <span className="art-tags">
+              {post.tags.map((t) => (
+                <Link key={t} href={tagHref(t)}>#{t}</Link>
+              ))}
+            </span>
           </div>
         </div>
         <div className="vert" aria-hidden="true">{cat.ja} ─ {cat.zh}</div>

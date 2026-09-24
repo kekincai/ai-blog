@@ -6,7 +6,11 @@ import PostBand from "@/components/post/PostBand";
 import PostHeader from "@/components/post/PostHeader";
 import SideNotes from "@/components/post/SideNotes";
 import Toc from "@/components/post/Toc";
+import JsonLd from "@/components/ui/JsonLd";
 import { getAdjacent, getAllPosts, getPost } from "@/lib/content/posts";
+import { categories, site } from "@/config/site";
+// 公式样式只有文章页需要，不放进全站样式
+import "katex/dist/katex.min.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -37,6 +41,22 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <article>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          url: `${site.url}/posts/${post.slug}`,
+          image: `${site.url}/posts/${post.slug}/opengraph-image`,
+          inLanguage: "zh-CN",
+          articleSection: categories[post.category].zh,
+          keywords: post.tags.join(", "),
+          author: { "@type": "Person", name: site.author, url: site.github },
+          publisher: { "@type": "Person", name: site.author },
+        }}
+      />
       <PostHeader post={post} />
       <PostBand post={post} />
 

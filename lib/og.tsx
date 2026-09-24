@@ -1,23 +1,11 @@
 /** 分享卡片（Open Graph 图）与 Apple 图标的共用部分，构建时生成静态图片 */
+import EnsoMark from "@/components/ui/EnsoMark";
+
+export { EnsoMark };
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
 const C = { washi: "#f2efe8", ink: "#141417", muted: "#5a5750", hair: "#cfc9bc", accent: "#ff2e63", accentInk: "#c8134a" };
-
-/** 圆相：和首页 Enso / favicon 同一套比例（缺口约 47°，起点旋转 -70°） */
-export function EnsoMark({ size }: { size: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 64 64">
-      <path d="M32 2v60M2 32h60" stroke={C.hair} strokeWidth="0.4" />
-      <circle cx="32" cy="32" r="17.5" fill="none" stroke={C.accent} strokeWidth="0.8" strokeDasharray="1.2 2.2" />
-      <circle
-        cx="32" cy="32" r="22" fill="none" stroke={C.ink} strokeWidth="2.4" strokeLinecap="round"
-        strokeDasharray="120.4 17.8" transform="rotate(-70 32 32)"
-      />
-      <circle cx="32" cy="32" r="2.6" fill={C.accent} />
-    </svg>
-  );
-}
 
 /**
  * 从 Google Fonts 取只包含指定文字的字体子集（satori 需要 ttf/otf，不支持 woff2）。
@@ -40,7 +28,7 @@ export async function loadFont(family: string, weight: number, text: string) {
 export function OgCard({ kicker, title, sub, hasFont }: { kicker: string; title: string; sub: string; hasFont: boolean }) {
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", background: C.washi, color: C.ink, padding: 72, gap: 64, alignItems: "center" }}>
-      <EnsoMark size={420} />
+      <EnsoMark size={420} variant="fine" />
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 28, height: "100%", justifyContent: "center" }}>
         <div style={{ display: "flex", fontSize: 24, color: C.accentInk, letterSpacing: 4 }}>{"// " + kicker}</div>
         {hasFont && (

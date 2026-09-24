@@ -14,7 +14,7 @@
 .prose li { margin-bottom: 8px; }
 .prose li::marker { font-family: var(--mono); color: var(--accent-ink); }
 .prose hr { border: 0; border-top: 1px solid var(--hair); margin: 56px 0; }
-.prose img { margin: 40px 0; }
+.prose img { margin: 40px 0; height: auto; }
 .prose :not(pre) > code { font: .88em var(--mono); background: var(--washi-2); padding: 2px 6px; }
 .prose :not(pre) > code[data-language] { background: var(--night); } /* 带语言高亮的行内代码 `x{:python}` */
 .prose blockquote { margin: 48px 0; padding: 40px 0 40px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--hair); font: 600 28px/1.7 var(--serif); display: flex; gap: 20px; }
@@ -72,3 +72,12 @@
 .prose [data-footnote-backref] { border: 0; font-family: var(--mono); }
 .prose [data-footnote-ref] + * { scroll-margin-top: 120px; }
 .prose .footnotes li { scroll-margin-top: 120px; }
+
+/* Markdown 里直接写的 HTML：视频、嵌入、折叠块、按键 */
+.prose video, .prose iframe { display: block; width: 100%; margin: 40px 0; border: 0; background: var(--night); }
+.prose iframe { aspect-ratio: 16 / 9; height: auto; }
+.prose details { margin: 32px 0; border: 1px solid var(--hair); padding: 14px 20px; }
+.prose summary { cursor: pointer; font-weight: 500; }
+.prose details[open] summary { margin-bottom: 12px; }
+.prose kbd { font: .8em var(--mono); padding: 2px 6px; border: 1px solid var(--hair); border-bottom-width: 2px; background: var(--washi); }
+.prose sub, .prose sup { font-size: .7em; }

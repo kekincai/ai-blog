@@ -5,13 +5,15 @@ const siteUrl =
 
 export const site = {
   name: "PAUL.LOG",
-  tagline: "潜在空間ノート",
+  tagline: "AI 学习笔记",
   description: "一个人的 AI 学习现场：学习、认识与体会。",
   author: "Paul",
   url: siteUrl, // 绑定自定义域名后，在 Vercel 里设置环境变量 SITE_URL 即可
   bio: "正在系统地学习人工智能。这里是我的学习现场：读过的论文、写过的代码，和一路上的想法。", // TODO: 换成你自己的介绍
   github: "https://github.com/kekincai",
   repo: "https://github.com/kekincai/ai-blog",
+  // 邮件订阅：在 buttondown.com 注册后，把用户名填到 Vercel 环境变量 BUTTONDOWN_USERNAME；留空则订阅框显示 RSS 地址
+  buttondown: process.env.BUTTONDOWN_USERNAME ?? "",
 };
 
 export type CategoryKey = "learn" | "insight" | "feel";

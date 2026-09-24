@@ -37,7 +37,7 @@
   .hanko { margin: 0; }
   .foot-grid { grid-template-columns: 1fr; gap: 40px; }
   .subscribe, .foot-links { grid-column: auto; }
-  .foot-links { flex-direction: row; gap: 24px; }
+  .foot-links { flex-direction: row; flex-wrap: wrap; gap: 12px 24px; }
   .art-head .wrap { grid-template-columns: 1fr; padding-block: 56px 48px; }
   .art-head-main { grid-column: 1; }
   .art-head h1 { font-size: 38px; }
@@ -59,7 +59,7 @@
   .nav a { white-space: nowrap; }
   .brand-name small { display: none; }
   .brand-name strong { font-size: 14px; letter-spacing: .12em; }
-  .seal { width: 36px; height: 36px; font-size: 20px; }
+  .brand-mark { width: 36px; height: 36px; }
   .site-header .wrap { height: 68px; }
   .hero h1 { font-size: 40px; }
   .hero-tags { gap: 12px 24px; }

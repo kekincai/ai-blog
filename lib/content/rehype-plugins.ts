@@ -1,7 +1,10 @@
 /**
  * 博客专用的 Markdown 效果（rehype 插件）。语法说明见 docs/WRITING.md。
  */
+import fs from "node:fs";
+import path from "node:path";
 import type { Element, ElementContent, Root } from "hast";
+import { imageSize } from "image-size";
 import { visit } from "unist-util-visit";
 
 const CALLOUTS: Record<string, string> = {
@@ -42,11 +45,28 @@ export function rehypeCallouts() {
   };
 }
 
-/** 单独成段、带标题的图片 ![说明](图片 "图注") → <figure> + 图注；所有图片懒加载 */
+/** 本站图片（public/ 下）补上宽高，加载时页面不会跳动 */
+function setImageSize(img: Element) {
+  const src = String(img.properties.src ?? "");
+  if (!src.startsWith("/") || img.properties.width) return;
+  const file = path.join(process.cwd(), "public", decodeURI(src.split(/[?#]/)[0]));
+  try {
+    const { width, height } = imageSize(fs.readFileSync(file));
+    if (width && height) Object.assign(img.properties, { width, height });
+  } catch {
+    // 图片不存在或格式不认识时保持原样
+  }
+}
+
+/** 单独成段、带标题的图片 ![说明](图片 "图注") → <figure> + 图注；所有图片懒加载并补上宽高 */
 export function rehypeFigures() {
   return (tree: Root) => {
     visit(tree, "element", (node, index, parent) => {
-      if (node.tagName === "img") node.properties.loading = "lazy";
+      if (node.tagName === "img") {
+        node.properties.loading = "lazy";
+        node.properties.decoding = "async";
+        setImageSize(node);
+      }
       if (node.tagName !== "p" || !parent || index === undefined) return;
       const kids = node.children.filter((c) => !isBlank(c));
       const img = kids[0];

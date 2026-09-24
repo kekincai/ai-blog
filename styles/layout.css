@@ -5,7 +5,10 @@
 .site-header .wrap { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: flex; align-items: center; gap: 14px; }
 .brand:hover { color: var(--ink); }
-.seal { width: 44px; height: 44px; display: grid; place-items: center; background: var(--accent); color: var(--ink); font: 900 24px var(--serif); }
+.brand-mark { flex-shrink: 0; }
+.brand-mark .enso-mark-ring { transform-origin: 32px 32px; }
+.brand:hover .enso-mark-ring { animation: spin 6s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .brand:hover .enso-mark-ring { animation: none; } }
 .brand-name { display: flex; flex-direction: column; gap: 2px; }
 .brand-name strong { font: 700 16px var(--mono); letter-spacing: .18em; }
 .brand-name small { font-size: 11px; color: var(--muted); letter-spacing: .2em; }

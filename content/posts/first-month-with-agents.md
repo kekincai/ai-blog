@@ -4,6 +4,7 @@ date: 2026-09-05
 category: feel
 excerpt: 从怀疑到依赖，再到重新学会怀疑。
 tags: [Agents, 随笔]
+draft: true  # 示例占位文章：本地和预览部署可见，正式站点不显示。写好真实内容后删掉这行
 ---
 
 ## 第一周

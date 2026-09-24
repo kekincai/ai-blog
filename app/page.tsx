@@ -4,7 +4,9 @@ import LatestPosts from "@/components/home/LatestPosts";
 import NowLearning from "@/components/home/NowLearning";
 import Pillars from "@/components/home/Pillars";
 import Quote from "@/components/home/Quote";
+import JsonLd from "@/components/ui/JsonLd";
 import { getAllPosts, getFeaturedPost } from "@/lib/content/posts";
+import { site } from "@/config/site";
 
 export default function Home() {
   const featured = getFeaturedPost();
@@ -12,6 +14,7 @@ export default function Home() {
 
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, description: site.description, url: site.url, inLanguage: "zh-CN" }} />
       <Hero startHref={featured ? `/posts/${featured.slug}` : "/archive"} />
       <Pillars />
       {featured && <FeaturedPost post={featured} />}

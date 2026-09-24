@@ -4,6 +4,7 @@ date: 2026-09-12
 category: insight
 excerpt: 把 prompt 当成 API 来设计之后，很多「玄学」问题都变成了工程问题。
 tags: [Prompt, LLM]
+draft: true  # 示例占位文章：本地和预览部署可见，正式站点不显示。写好真实内容后删掉这行
 ---
 
 ## 从咒语到接口
