@@ -25,3 +25,16 @@
 .page-head h1 { margin: 16px 0 0; font: 900 72px/1.2 var(--serif); }
 .page-head p { margin: 0; max-width: 420px; color: var(--muted); line-height: 1.9; }
 .year { font: 700 14px var(--mono); letter-spacing: .1em; padding: 48px 0 16px; color: var(--accent-ink); }
+
+/* 标签页 */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 12px 16px; padding-top: 32px; border-top: 2px solid var(--ink); }
+.tag-cloud a { font: 16px var(--mono); padding: 8px 14px; border: 1px solid var(--hair); }
+.tag-cloud a:hover { border-color: var(--accent-ink); }
+.tag-cloud span { color: var(--muted); font-size: 12px; margin-left: 4px; }
+
+/* 搜索页 */
+.search-box { display: flex; align-items: center; gap: 24px; border-bottom: 2px solid var(--ink); padding-bottom: 12px; }
+.search-box input { flex: 1; min-width: 0; border: 0; background: transparent; font: 400 28px var(--serif); color: var(--ink); padding: 8px 0; }
+.search-box input:focus { outline: none; }
+.search-box input::placeholder { color: var(--hair); }
+.search-box .mono { font-size: 12px; color: var(--muted); letter-spacing: .1em; white-space: nowrap; }

@@ -7,3 +7,6 @@ next-env.d.ts
 .DS_Store
 .env*.local
 .claude/
+
+# 构建时生成的中文字体子集（scripts/subset-fonts.mjs）
+styles/fonts/

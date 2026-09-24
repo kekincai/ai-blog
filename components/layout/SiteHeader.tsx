@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import EnsoMark from "@/components/ui/EnsoMark";
 import { categoryList, site } from "@/config/site";
 
 const nav = [
@@ -33,7 +34,7 @@ export default function SiteHeader({ postCategories }: { postCategories: Record<
     <header className="site-header">
       <div className="wrap">
         <Link href="/" className="brand" aria-label={`${site.name} 首页`}>
-          <span className="seal" aria-hidden="true">学</span>
+          <EnsoMark size={44} className="brand-mark" />
           <span className="brand-name">
             <strong>{site.name}</strong>
             <small>{site.tagline}</small>

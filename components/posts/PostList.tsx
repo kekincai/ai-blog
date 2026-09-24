@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories } from "@/config/site";
-import { formatDate, type PostMeta } from "@/lib/content/posts";
+import { formatDate } from "@/lib/format";
+import type { PostMeta } from "@/lib/content/posts";
 
 export default function PostRow({ post }: { post: PostMeta }) {
   const cat = categories[post.category];
@@ -20,8 +21,8 @@ export default function PostRow({ post }: { post: PostMeta }) {
   );
 }
 
-export function PostList({ posts }: { posts: PostMeta[] }) {
-  if (posts.length === 0) return <div className="post-list"><p className="empty">$ ls → 这里还没有文章。</p></div>;
+export function PostList({ posts, empty = "$ ls → 这里还没有文章。" }: { posts: PostMeta[]; empty?: string }) {
+  if (posts.length === 0) return <div className="post-list"><p className="empty">{empty}</p></div>;
   return (
     <div className="post-list">
       {posts.map((p) => (

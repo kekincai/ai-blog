@@ -27,3 +27,5 @@ jobs:
       # 构建会解析所有文章：frontmatter 写错（如 category 无效）会在这里失败
       - name: 构建
         run: npm run build
+      - name: 死链检查
+        run: npm run check-links

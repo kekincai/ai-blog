@@ -32,6 +32,8 @@ img { max-width: 100%; display: block; }
 .link-line { display: inline-flex; gap: 8px; border-bottom: 1px solid var(--ink); padding-bottom: 4px; font-size: 15px; align-self: flex-start; }
 .link-accent { border-bottom: 2px solid var(--accent); font-size: 16px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* 「跳到正文」：键盘 Tab 聚焦时显示在左上角 */
+.skip-link:focus { top: 12px; left: 12px; z-index: 100; width: auto; height: auto; clip: auto; padding: 10px 16px; background: var(--ink); color: var(--washi); font: 14px var(--sans); }
 @media (prefers-reduced-motion: reduce) { .blink { animation: none; } html { scroll-behavior: auto; } }
 
 /* 草稿标记（只在本地和预览部署出现） */

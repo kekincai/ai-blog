@@ -86,9 +86,27 @@ export function getPostsByCategory(cat: CategoryKey) {
   return getAllPosts().filter((p) => p.category === cat);
 }
 
+/** 所有标签及文章数，按文章数从多到少 */
+export function getAllTags() {
+  const count = new Map<string, number>();
+  for (const p of getAllPosts()) for (const t of p.tags) count.set(t, (count.get(t) ?? 0) + 1);
+  return [...count].map(([tag, n]) => ({ tag, count: n })).sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, "zh"));
+}
+
+export function getPostsByTag(tag: string) {
+  return getAllPosts().filter((p) => p.tags.includes(tag));
+}
+
+export const tagHref = (tag: string) => `/tags/${encodeURIComponent(tag)}`;
+
 export function getFeaturedPost() {
   const all = getAllPosts();
   return all.find((p) => p.featured) ?? all[0];
+}
+
+/** 文章的 Markdown 原文（不含 frontmatter） */
+export function readPostSource(slug: string) {
+  return readRaw().find((r) => r.slug === slug)?.content ?? "";
 }
 
 export async function getPost(slug: string): Promise<Post | null> {
@@ -105,6 +123,4 @@ export function getAdjacent(slug: string) {
   return { newer: i > 0 ? all[i - 1] : undefined, older: i >= 0 ? all[i + 1] : undefined };
 }
 
-export function formatDate(d: string) {
-  return d.replaceAll("-", ".");
-}
+export { formatDate } from "@/lib/format";

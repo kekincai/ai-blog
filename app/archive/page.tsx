@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PostList } from "@/components/posts/PostList";
 import PageHead from "@/components/ui/PageHead";
 import { getAllPosts } from "@/lib/content/posts";
@@ -11,7 +12,7 @@ export default function ArchivePage() {
   return (
     <>
       <PageHead label="ARCHIVE — 全部文章" title="归档">
-        <p className="mono">{posts.length} ENTRIES</p>
+        <p className="mono">{posts.length} ENTRIES · <Link href="/tags">标签</Link> · <Link href="/search">搜索</Link></p>
       </PageHead>
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">

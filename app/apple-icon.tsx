@@ -7,7 +7,7 @@ export const contentType = "image/png";
 export default function AppleIcon() {
   return new ImageResponse(
     <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#f2efe8" }}>
-      <EnsoMark size={150} />
+      <EnsoMark size={150} variant="fine" />
     </div>,
     size
   );

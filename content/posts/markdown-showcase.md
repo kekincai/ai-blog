@@ -108,6 +108,23 @@ $$
 
 ![圆相图标](/posts/markdown-showcase/enso.svg "图注写在引号里")
 
+## 直接写 HTML
+
+Markdown 里可以直接写 HTML，用来做 Markdown 本身没有的效果。
+
+折叠块，适合放答案、长输出：
+
+<details>
+<summary>点开看推导过程</summary>
+
+折叠块里面也能继续写 **Markdown**，前后各空一行即可。
+
+</details>
+
+按键：按 <kbd>⌘</kbd> + <kbd>K</kbd>。上标和下标：d<sub>k</sub>、x<sup>2</sup>。
+
+嵌入视频（B 站、YouTube 的「嵌入代码」直接粘贴进来即可），会自动铺满正文宽度，按 16:9 显示。
+
 ## 脚注与分隔线
 
 在正文里写 `[^1]` 标记脚注[^1]，脚注内容会统一放到文章末尾[^note]。
