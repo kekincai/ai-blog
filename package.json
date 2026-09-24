@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noEmit",
-    "check-links": "node scripts/check-links.mjs"
+    "check-links": "node scripts/check-links.mjs",
+    "heron": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-heron.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

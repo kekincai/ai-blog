@@ -1,7 +1,8 @@
 /** 分享卡片（Open Graph 图）与 Apple 图标的共用部分，构建时生成静态图片 */
-import EnsoMark from "@/components/ui/EnsoMark";
+import { heronSceneSVG } from "@/lib/heron/scene";
 
-export { EnsoMark };
+/** 苍鹭骑车图标（与 app/icon.svg 同一张图），以 data URI 形式给 satori 渲染 */
+export const HERON_ICON = `data:image/svg+xml;base64,${Buffer.from(heronSceneSVG({ id: "og", detail: "icon" })).toString("base64")}`;
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
@@ -24,11 +25,12 @@ export async function loadFont(family: string, weight: number, text: string) {
   }
 }
 
-/** 分享卡片：左侧圆相，右侧站名 + 标题 */
+/** 分享卡片：左侧苍鹭骑车，右侧站名 + 标题 */
 export function OgCard({ kicker, title, sub, hasFont }: { kicker: string; title: string; sub: string; hasFont: boolean }) {
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", background: C.washi, color: C.ink, padding: 72, gap: 64, alignItems: "center" }}>
-      <EnsoMark size={420} variant="fine" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={HERON_ICON} width={420} height={420} alt="" style={{ borderRadius: 48 }} />
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 28, height: "100%", justifyContent: "center" }}>
         <div style={{ display: "flex", fontSize: 24, color: C.accentInk, letterSpacing: 4 }}>{"// " + kicker}</div>
         {hasFont && (

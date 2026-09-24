@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import EnsoMark from "@/components/ui/EnsoMark";
+import HeronRide from "@/components/sakura/HeronRide";
 import { categoryList, site } from "@/config/site";
 
 const nav = [
@@ -30,11 +30,14 @@ export default function SiteHeader({ postCategories }: { postCategories: Record<
     return () => window.removeEventListener("scroll", onScroll);
   }, [isPost]);
 
+  const isHome = pathname === "/";
+
   return (
-    <header className="site-header">
+    <header className={isHome ? "site-header is-home" : "site-header"}>
+      {/* 只有首页页头有「樱花树下苍鹭骑车」的动画，铺满整个页头 */}
+      {isHome && <HeronRide className="home-scene" />}
       <div className="wrap">
         <Link href="/" className="brand" aria-label={`${site.name} 首页`}>
-          <EnsoMark size={44} className="brand-mark" />
           <span className="brand-name">
             <strong>{site.name}</strong>
             <small>{site.tagline}</small>
