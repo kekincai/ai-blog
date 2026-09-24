@@ -9,7 +9,7 @@
  * 用到的字没有变化时直接跳过；网络不通但已有字体文件时保留旧文件，不让构建失败。
  */
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -63,6 +63,7 @@ if (haveAll && old?.hash === hash) {
   console.log(`[fonts] 用到的字没有变化（${text.length} 个），跳过`);
 } else {
   try {
+    mkdirSync(OUT, { recursive: true }); // styles/fonts/ 不进 git，新克隆的仓库里没有这个目录
     for (const font of FONTS) {
       const data = await download(font, text);
       writeFileSync(join(OUT, font.file), data);
