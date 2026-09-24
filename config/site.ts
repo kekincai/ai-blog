@@ -1,7 +1,23 @@
 // 站点地址：优先用 SITE_URL，其次用 Vercel 自动注入的生产域名，本地开发回落到 localhost
-const siteUrl =
+const siteUrl = normalizeOrigin(
   process.env.SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
+);
+
+/** 站点地址会写进 RSS、sitemap、canonical 等处：必须是 http(s) 的纯域名地址，写错时让构建直接失败 */
+function normalizeOrigin(value: string) {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(`SITE_URL 不是合法的网址：「${value}」，应形如 https://example.com`);
+  }
+  if (url.protocol !== "https:" && url.protocol !== "http:") throw new Error(`SITE_URL 只能用 http / https：「${value}」`);
+  if (url.username || url.password || url.search || url.hash || (url.pathname !== "/" && url.pathname !== "")) {
+    throw new Error(`SITE_URL 只能是域名，不能带路径、参数或账号：「${value}」`);
+  }
+  return url.origin;
+}
 
 export const site = {
   name: "PAUL.LOG",
