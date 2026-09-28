@@ -8,6 +8,8 @@
 
 日式余白 × 赛博朋克风格的个人博客，用 Markdown 写作，Next.js 静态生成，部署在 Vercel。
 
+**🌸 [blog.kejincai.dev](https://blog.kejincai.dev)**
+
 [![CI](https://github.com/kekincai/ai-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/kekincai/ai-blog/actions/workflows/ci.yml)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-7-3178c6?logo=typescript&logoColor=white)
@@ -104,12 +106,14 @@ cp content/posts/_template.md content/posts/my-first-post.md
 
 ## 部署
 
-托管在 Vercel，已和本仓库关联：
+托管在 Vercel，已和本仓库关联，正式地址 **https://blog.kejincai.dev**：
 
 - 推送到 `main` → 自动部署正式站点
-- 其他分支 / PR → 生成预览链接，可以看到草稿
+- 其他分支 / PR → 生成预览链接（需要登录 Vercel），可以看到草稿
 
-站点地址（RSS、sitemap、分享卡片会用到）默认使用 Vercel 的生产域名。绑定自定义域名后，在 Vercel 项目的环境变量里设置 `SITE_URL=https://你的域名`。
+域名 `kejincai.dev` 的 DNS 在 Cloudflare：`blog` 是一条 CNAME，指向 Vercel 给出的地址，**代理关闭（灰云，DNS only）**，HTTPS 证书由 Vercel 自动签发和续期。
+
+站点地址（RSS、sitemap、分享卡片会用到）自动取 Vercel 的生产域名，即 `blog.kejincai.dev`；如需覆盖，在 Vercel 环境变量里设置 `SITE_URL`。
 
 ### 邮件订阅
 
